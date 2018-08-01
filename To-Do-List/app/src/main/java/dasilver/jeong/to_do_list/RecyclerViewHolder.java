@@ -1,9 +1,12 @@
 package dasilver.jeong.to_do_list;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import static dasilver.jeong.to_do_list.MainActivity.count;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     public TextView memoListText;

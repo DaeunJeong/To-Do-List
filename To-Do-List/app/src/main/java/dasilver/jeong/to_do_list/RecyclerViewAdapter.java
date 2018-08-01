@@ -3,15 +3,21 @@ package dasilver.jeong.to_do_list;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import static dasilver.jeong.to_do_list.MainActivity.memoPercentText;
+import static dasilver.jeong.to_do_list.MainActivity.total;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private ArrayList<RecyclerItem> recyclerItems;
+    private int percent;
+    public static double count= 0;
     Context recyclerContext;
 
     public RecyclerViewAdapter(ArrayList itemList) {
@@ -27,13 +33,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerViewHolder holder, int position) {
 
         holder.memoListText.setText(recyclerItems.get(position).memoListText);
-        if(holder.radioBtnDone.isChecked()) {
-        }
 
+        holder.radioBtnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.radioBtnDone.isChecked()) {
+                    count++;
+                    percent = (int) ((count/total)*100);
+                    memoPercentText.setText(Integer.toString(percent) + "%");
+                } else if(holder.radioBtnDont.isChecked()) {
+                    count--;
+                    percent = (int) ((count/total)*100);
+                    memoPercentText.setText(Integer.toString(percent) + "%");
+                }
+            }
+        });
     }
+
 
 
     @Override
